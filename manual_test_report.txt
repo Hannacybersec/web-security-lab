@@ -1,0 +1,84 @@
+Web Security Testing Lab - Manual Test Report
+================================================
+
+Target:
+http://127.0.0.1:8080
+
+Testing Scope:
+Local authorized web security testing lab only.
+
+1. HTTP Response Test
+---------------------
+Test:
+curl -I http://127.0.0.1:8080
+
+Result:
+HTTP 200 OK
+
+Observation:
+The local web server responded successfully.
+
+2. Server Banner Check
+----------------------
+Observation:
+Server: SimpleHTTP/0.6 Python/3.14.7
+
+Finding:
+Server technology and version information are exposed in the HTTP response.
+
+3. Security Header Check
+------------------------
+Checked:
+- Strict-Transport-Security
+- Referrer-Policy
+- Permissions-Policy
+- X-Content-Type-Options
+- Content-Security-Policy
+
+Result:
+The tested security headers were not present.
+
+4. HTTP Method Testing
+----------------------
+OPTIONS:
+Result: HTTP 501 Unsupported method
+
+POST:
+Result: HTTP 501 Unsupported method
+
+Observation:
+The Python SimpleHTTP server does not support these methods.
+
+5. Directory Listing Check
+--------------------------
+Tested the root page for directory-listing indicators.
+
+Result:
+No "Index of" or "Parent Directory" indicators were found.
+
+6. Input Parameter Test
+-----------------------
+Test:
+GET request using username and message parameters.
+
+Result:
+HTTP 200 OK
+
+Observation:
+The supplied parameter values were not reflected in the returned HTML.
+
+7. Automated Nikto Scan
+-----------------------
+Tool:
+Nikto 2.6.1
+
+Result:
+Security-header recommendations and server information disclosure were reported.
+
+Conclusion:
+The lab demonstrates basic web security assessment techniques including
+HTTP response inspection, security-header checking, HTTP method testing,
+input handling observation, directory-listing checks, and automated
+Nikto scanning.
+
+All testing was performed against the local authorized lab target.
